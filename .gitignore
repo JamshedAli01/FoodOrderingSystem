@@ -1,0 +1,59 @@
+# =============================================================================
+# FoodOrderingSystem - .gitignore
+# =============================================================================
+
+# Database credentials, local configurations, and environment secrets
+db.properties
+.env
+*.env
+*.local
+credentials.json
+secrets.properties
+
+# Compiled Java class files and build artifacts
+*.class
+out/
+bin/
+build/
+target/
+*.war
+*.ear
+
+# Package / Distribution artifacts (if generated)
+dist/
+
+# IDE and Project Tooling
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+.nb-gradle/
+nbproject/
+*.sublime-project
+*.sublime-workspace
+
+# VS Code specific (workspace configuration)
+.vscode/*
+!.vscode/settings.json
+
+# Operating System and Temporary files
+*.lnk
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+*$*
+*~
+*.bak
+*.tmp
+*.log
+
+
+# Crash logs and dump files
+hs_err_pid*
+replay_pid*
