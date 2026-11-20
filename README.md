@@ -1,126 +1,138 @@
-# Food Ordering System
+<div align="center">
 
-A desktop Food Ordering & Restaurant Management application developed in Java Swing with MySQL for database management.
+# 🍽️ Food Ordering System
 
----
+### A desktop restaurant ordering and management application built with Java Swing and MySQL
 
-## Features
+<p>
+  <img src="https://img.shields.io/badge/Java-17%2B-orange?logo=openjdk&logoColor=white" alt="Java 17+">
+  <img src="https://img.shields.io/badge/MySQL-8.0%2B-4479A1?logo=mysql&logoColor=white" alt="MySQL 8.0+">
+  <img src="https://img.shields.io/badge/UI-Java%20Swing-6f42c1" alt="Java Swing">
+</p>
 
-- **User Authentication**: Secure user registration and login using PBKDF2 with HMAC-SHA-256 and cryptographic salts.
-- **Restaurant & Menu Browsing**: Browse restaurants, cuisines, categorized food items, and live ratings.
-- **Cart & Order Processing**: Multi-item cart management with atomic transactional order placement (`commit` / `rollback`).
-- **Interactive Swing UI**: Custom styled Swing interface with custom rounded panels, buttons, and theme constants.
+</div>
 
----
+## ✨ Overview
 
-## Prerequisites
+Food Ordering System is a Java desktop application for browsing restaurants and menus, managing a shopping cart, and placing orders through a MySQL-backed database.
 
-- **Java Development Kit (JDK)**: JDK 17 or higher (tested with modern OpenJDK/Oracle JDK).
-- **MySQL Server**: MySQL 8.0 or higher.
-- **MySQL Connector/J**: JDBC driver included in `lib/` (`mysql-connector-j-26.7.0.jar`).
+It also demonstrates secure authentication, transaction-safe order processing, and reusable custom Swing components.
 
----
+## 🚀 Features
 
-## Database Setup
+| Area | Highlights |
+| --- | --- |
+| 🔐 Authentication | Registration and login protected with salted `PBKDF2WithHmacSHA256` password hashing |
+| 🍔 Restaurant & menus | Browse restaurants, cuisines, categories, menu items, and ratings |
+| 🛒 Cart & orders | Add multiple items, update quantities, and place orders atomically |
+| 🖥️ Desktop UI | Custom rounded panels, buttons, themes, and dedicated Swing screens |
+| 🛡️ Database safety | Parameterized queries and transaction handling with `commit` / `rollback` |
+
+## 🧰 Prerequisites
+
+- **JDK 17 or newer**
+- **MySQL Server 8.0 or newer**
+- **MySQL Connector/J**, included in `lib/`
+
+## ⚙️ Setup
+
+### 1. Prepare the database
 
 > [!CAUTION]
-> **Destructive Database Operation**: `database/schema.sql` contains `DROP TABLE IF EXISTS` statements. Running this script will drop existing tables and data for this database schema. Ensure you backup any existing data before executing it.
+> `database/schema.sql` contains `DROP TABLE IF EXISTS` statements. Back up existing data before running it.
 
-1. **Start your MySQL server**:
-   Ensure MySQL service is active and listening on port `3306`.
+Start MySQL on port `3306`, then execute the schema and seed scripts:
 
-2. **Run schema and seed scripts**:
-   Open a terminal, MySQL Workbench, or your preferred SQL client and execute:
-   ```sql
-   -- Create tables and views (WARNING: Drops existing tables if present)
-   SOURCE database/schema.sql;
-
-   -- Populate initial categories, restaurants, and menu items
-   SOURCE database/seed_data.sql;
-   ```
-
-3. **(Recommended) Create a dedicated MySQL User (Least Privilege)**:
-   Avoid running desktop applications under the MySQL `root` account. Create a dedicated user with access limited to `food_ordering_system`:
-   ```sql
-   CREATE USER 'food_app_user'@'localhost' IDENTIFIED BY 'StrongPasswordHere123!';
-   GRANT SELECT, INSERT, UPDATE, DELETE ON food_ordering_system.* TO 'food_app_user'@'localhost';
-   FLUSH PRIVILEGES;
-   ```
-
----
-
-## Configuration (`db.properties`)
-
-The application loads connection parameters from a local file named `db.properties` at runtime. For security reasons, this file is excluded by `.gitignore` and must never be committed to public version control.
-
-1. Create `db.properties` in the project root by copying the template:
-   ```bash
-   # Windows PowerShell
-   Copy-Item db.properties.example db.properties
-
-   # Linux / macOS
-   cp db.properties.example db.properties
-   ```
-
-2. Open `db.properties` and enter your database credentials:
-   ```properties
-   db.url=jdbc:mysql://localhost:3306/food_ordering_system
-   db.user=food_app_user
-   db.password=StrongPasswordHere123!
-   ```
-
----
-
-## Building and Running
-
-### Compile
-From the root directory of the project:
-
-```powershell
-# Create output directory
-mkdir out
-
-# Compile all source files
-javac -cp "lib/*" -d out (Get-ChildItem -Recurse -Filter *.java src | Select-Object -ExpandProperty FullName)
+```sql
+SOURCE database/schema.sql;
+SOURCE database/seed_data.sql;
 ```
 
-### Run
+For local development, create a dedicated database user instead of using `root`:
+
+```sql
+CREATE USER 'food_app_user'@'localhost' IDENTIFIED BY 'StrongPasswordHere123!';
+GRANT SELECT, INSERT, UPDATE, DELETE ON food_ordering_system.* TO 'food_app_user'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+### 2. Configure the database connection
+
+Create a local configuration file from the included template:
+
+```bash
+# Linux / macOS
+cp db.properties.example db.properties
+
+# Windows PowerShell
+Copy-Item db.properties.example db.properties
+```
+
+Then update `db.properties` with your local credentials:
+
+```properties
+db.url=jdbc:mysql://localhost:3306/food_ordering_system
+db.user=food_app_user
+db.password=StrongPasswordHere123!
+```
+
+> 🔒 `db.properties` is ignored by Git. Never commit real database credentials.
+
+## ▶️ Build and run
+
+From the project root:
+
+### Windows PowerShell
+
 ```powershell
+New-Item -ItemType Directory -Force out
+javac -cp "lib/*" -d out (Get-ChildItem -Recurse -Filter *.java src | Select-Object -ExpandProperty FullName)
 java -cp "out;lib/*" Main
 ```
-*(On Linux/macOS, replace `;` with `:` in classpath: `java -cp "out:lib/*" Main`)*
 
----
+### Linux / macOS
 
-## Project Structure
-
+```bash
+mkdir -p out
+javac -cp "lib/*" -d out $(find src -name "*.java")
+java -cp "out:lib/*" Main
 ```
+
+## 📸 Screenshots
+
+Screenshots would make the project easier to understand at a glance. The most useful captures would be:
+
+1. Login or registration screen
+2. Restaurant/menu browsing screen
+3. Cart and checkout screen
+4. Order receipt or confirmation screen
+
+Add them to a folder such as `docs/screenshots/`, then embed them like this:
+
+```md
+![Menu browsing screen](docs/screenshots/menu.png)
+```
+
+## 🗂️ Project structure
+
+```text
 FoodOrderingSystem/
-├── .vscode/               # VS Code workspace settings (referenced libraries)
-├── database/              # Database scripts and diagrams
-│   ├── schema.sql         # Table schemas and views (contains DROP TABLE)
-│   ├── seed_data.sql      # Initial menu and restaurant records
-│   ├── demo_queries.sql   # Verification and testing SQL queries
-│   └── erd.mwb            # MySQL Workbench ERD model
-├── images/                # Application image assets
-├── lib/                   # Third-party runtime libraries (MySQL JDBC driver)
-├── src/                   # Java application source code
-│   ├── dao/               # Data Access Objects (UserDAO, MenuDAO, OrderDAO, RestaurantDAO)
-│   ├── database/          # Database connection provider (DBConnection)
-│   ├── gui/               # Swing JFrame windows (Login, Register, Home, Cart, Menu, Receipt)
-│   ├── model/             # Domain entity models (User, MenuItem, Order, Restaurant, CartItem)
-│   ├── ui/                # Swing custom UI components and styling
-│   └── util/              # Utilities (Session, CartManager, WindowHelper)
-├── .gitignore             # Git exclusion rules
-├── db.properties.example  # Configuration template (safe for version control)
-├── Report.docx            # Project documentation report
-└── README.md              # Project setup and security guide
+├── database/              # Schema, seed data, queries, and ERD model
+├── lib/                   # Third-party runtime libraries
+├── src/
+│   ├── dao/               # Data access objects
+│   ├── database/          # Database connection provider
+│   ├── gui/               # Swing application windows
+│   ├── model/             # Domain entities
+│   ├── ui/                # Reusable UI components and styling
+│   └── util/              # Session, cart, and window utilities
+├── db.properties.example  # Safe database configuration template
+└── README.md              # Project documentation
 ```
 
----
+## 🔐 Security notes
 
-## Security Notes
+- Database credentials are kept in the ignored local `db.properties` file.
+- Passwords are salted with 16 random bytes and hashed with `PBKDF2WithHmacSHA256` using 120,000 iterations.
+- User input is handled with `PreparedStatement` to reduce SQL injection risk.
 
-- **Excluded Secrets**: `db.properties` is protected via `.gitignore`.
-- **Password Security**: Passwords are never stored in plaintext. They are salted with 16 random bytes and hashed using PBKDF2WithHmacSHA256 (120,000 iterations). Hashes and salts are discarded from in-memory session objects after authentication.
-- **SQL Injection Defense**: All user inputs are parameterized via `PreparedStatement`.
