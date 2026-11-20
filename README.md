@@ -100,18 +100,29 @@ java -cp "out:lib/*" Main
 
 ## 📸 Screenshots
 
-Screenshots would make the project easier to understand at a glance. The most useful captures would be:
+### 🔐 Login
 
-1. Login or registration screen
-2. Restaurant/menu browsing screen
-3. Cart and checkout screen
-4. Order receipt or confirmation screen
+<p align="center">
+  <img src="docs/screenshots/login.png" alt="Food Ordering System login screen" width="700">
+</p>
 
-Add them to a folder such as `docs/screenshots/`, then embed them like this:
+### 🏪 Browse restaurants
 
-```md
-![Menu browsing screen](docs/screenshots/menu.png)
-```
+<p align="center">
+  <img src="docs/screenshots/restaurants.png" alt="Restaurant browsing screen" width="700">
+</p>
+
+### 🍽️ Browse a menu
+
+<p align="center">
+  <img src="docs/screenshots/menu.png" alt="Restaurant menu screen" width="700">
+</p>
+
+### 🛒 Shopping cart
+
+<p align="center">
+  <img src="docs/screenshots/cart.png" alt="Shopping cart screen" width="700">
+</p>
 
 ## 🗂️ Project structure
 
